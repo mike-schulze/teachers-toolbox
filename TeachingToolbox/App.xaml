@@ -1,0 +1,22 @@
+﻿<Application x:Class="TeachingToolbox.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:TeachingToolbox.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cnv="clr-namespace:TeachingToolbox.Converters"
+             mc:Ignorable="d">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Global View Model Locator-->
+            <vm:ViewModelLocator x:Key="Locator"
+                                 d:IsDataSource="True" />
+
+            <cnv:InverseBooleanConverter x:Key="InverseBooleanConverter" True="False" False="True" />
+            <cnv:BooleanToVisibilityConverter x:Key="BoolToVisibility" True="Visible" False="Collapsed" />
+            <cnv:BooleanToVisibilityConverter x:Key="InverseBoolToVisibility" True="Collapsed" False="Visible" />
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

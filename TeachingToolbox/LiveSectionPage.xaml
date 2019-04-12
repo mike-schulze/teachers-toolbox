@@ -1,0 +1,54 @@
+﻿<Page x:Class="TeachingToolbox.LiveSectionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:prop="clr-namespace:TeachingToolbox.Properties"
+      xmlns:v="clr-namespace:TeachingToolbox.View"
+      d:DesignHeight="600" d:DesignWidth="800"
+      DataContext="{Binding Class, Source={StaticResource Locator}}"
+	  Title="{Binding SelectedSection}">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <TabControl>
+
+        <!--Attendance-->
+        <TabItem Header="{x:Static prop:Resources.attendance}">
+            <v:AttendanceTakerControl />
+        </TabItem>
+
+        <!--Timer-->
+        <TabItem Header="{x:Static prop:Resources.timer}">
+            <v:TimerControl />
+        </TabItem>
+        
+        <!--Pick Random Student-->
+        <TabItem Header="{x:Static prop:Resources.pick_random}">
+            <v:RandomizerControl />
+        </TabItem>
+
+        <!--Create Groups-->
+        <TabItem Header="{x:Static prop:Resources.group_generator}">
+            <v:RandomGroupsControl />
+        </TabItem>
+
+
+    </TabControl>
+    
+</Page>

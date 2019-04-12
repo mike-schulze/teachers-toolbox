@@ -1,0 +1,106 @@
+﻿<Page x:Class="TeachingToolbox.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+      xmlns:prop="clr-namespace:TeachingToolbox.Properties"
+      mc:Ignorable="d" 
+      xmlns:models="clr-namespace:TeachingToolbox.Model"
+      d:DesignHeight="600" d:DesignWidth="800"
+      DataContext="{Binding Home, Source={StaticResource Locator}}"
+	  Title="{x:Static prop:Resources.home}"
+      Name="This">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DrawingImage x:Key="SettingsImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="F1M0,0L48,0 48,48 0,48 0,0">
+                        <DrawingGroup>
+                            <DrawingGroup.Transform>
+                                <MatrixTransform Matrix="1,0,0,1,22,22"/>
+                            </DrawingGroup.Transform>
+                            <GeometryDrawing Brush="{StaticResource AccentColorBrush}">
+                                <GeometryDrawing.Geometry>
+                                    <EllipseGeometry Center="2,2" RadiusY="2" RadiusX="2"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                        <DrawingGroup>
+                            <DrawingGroup.Transform>
+                                <MatrixTransform Matrix="1,0,0,1,14.1748,14.1748"/>
+                            </DrawingGroup.Transform>
+                            <GeometryDrawing Brush="{StaticResource AccentColorBrush}" Geometry="M10.515201,3.3794002 L13.734601,0.61820011 C14.339001,0.87520012 14.912801,1.1899001 15.449301,1.5554001 L14.871001,5.7552003 19.099901,6.0793003 C19.341801,6.6776003 19.527501,7.3046004 19.650401,7.9538004 L16.271001,10.515201 19.032201,13.734601 C18.775201,14.338901 18.460501,14.912801 18.095001,15.449301 L13.895201,14.871001 13.571101,19.099901 C12.972801,19.341801 12.345801,19.527501 11.696601,19.650401 L9.1351004,16.271001 5.9158003,19.032201 C5.3114003,18.775201 4.7376003,18.460501 4.2011003,18.095001 L4.7794003,13.895101 0.5505001,13.571101 C0.30860009,12.972801 0.12290009,12.345801 8.0871585E-08,11.696501 L3.3794002,9.1351004 0.61820011,5.9158003 C0.87520012,5.3114003 1.1899001,4.7376003 1.5554001,4.2011003 L5.7552003,4.7794003 6.0793003,0.5504001 C6.6776003,0.30860009 7.3046004,0.12290009 7.9538004,8.0871585E-08 L10.515201,3.3794002 z M9.8252005,5.8252003 C7.6161004,5.8252003 5.8252003,7.6161004 5.8252003,9.8252005 5.8252003,12.034301 7.6161004,13.825201 9.8252005,13.825201 12.034301,13.825201 13.825201,12.034301 13.825201,9.8252005 13.825201,7.6161004 12.034301,5.8252003 9.8252005,5.8252003 z"/>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <CollectionViewSource x:Key="SectionsView" Source="{Binding Sections}">
+                <CollectionViewSource.SortDescriptions>
+                    <scm:SortDescription Direction="Ascending" PropertyName="Name" />
+                    <scm:SortDescription Direction="Ascending" PropertyName="Days" />
+                </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+            
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Viewbox Margin="15">
+            <ItemsControl ItemsSource="{Binding Source={StaticResource SectionsView}}"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          MaxWidth="900">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>                
+                    <DataTemplate>
+                        <Button HorizontalAlignment="Center"
+                                Width="250"
+                                Margin="25"
+                                Command="{Binding ElementName=This, Path=DataContext.EnterSectionCommand}"
+                                CommandParameter="{Binding}">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Margin="10" Content="{Binding Name}" />
+                                <Label Margin="10" Content="{Binding Days}" />
+                                <Label Margin="10" Content="{Binding Time}" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Viewbox>
+        <Button Grid.Row="2"                
+                Margin="25"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Command="{Binding GoToSettingsCommand}">
+            <StackPanel>
+                <Image Width="100" Height="100"
+                       Source="{StaticResource SettingsImage}" />
+                <TextBlock Text="{x:Static prop:Resources.settings}"
+                           Margin="3"
+                           HorizontalAlignment="Center" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="TeachingToolbox.View.TimerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             xmlns:prop="clr-namespace:TeachingToolbox.Properties"
+             d:DesignHeight="400" d:DesignWidth="600"
+             DataContext="{Binding Timer, Source={StaticResource Locator}}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Viewbox Margin="50">
+            <TextBlock Grid.Row="0"
+                       Foreground="{StaticResource AccentColorBrush}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="{Binding TimerString}"  />            
+        </Viewbox>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Margin="25"
+                    Padding="25,15"
+                    Command="{Binding StartCommand}"
+                    Content="{x:Static prop:Resources.start}" />
+
+            <Button Grid.Column="1"
+                    Margin="25"
+                    Padding="25,15"
+                    Command="{Binding StopCommand}"
+                    Content="{x:Static prop:Resources.stop}" />
+
+            <Button Grid.Column="2"
+                    Margin="25"
+                    Padding="25,15"
+                    Command="{Binding ResetCommand}"
+                    Content="{x:Static prop:Resources.reset}" />
+        </Grid>
+
+    </Grid>
+</UserControl>
